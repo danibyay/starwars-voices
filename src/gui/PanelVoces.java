@@ -43,7 +43,7 @@ public class PanelVoces extends JPanel implements ActionListener{
 		this.labelMensaje = new JLabel("    dfs               ");
 		this.mensaje = "Grabando por 5 segundos";
 		
-		this.grabar = new JButton("grabar nuevo sonido");
+		this.grabar = new JButton(new ImageIcon("recordd.png"));
 		
 		this.grabar.addActionListener(this);
 		this.b1.addActionListener(this);
