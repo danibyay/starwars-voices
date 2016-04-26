@@ -4,3 +4,6 @@ This is a school project where we apply the Fourier Transform to a given recordi
 
 Use with Eclipse for quick start.
 Else, rearrange everything to be in the same directory. (images and .java files)
+
+
+demo video: https://youtu.be/0hhBUvI-wgU
