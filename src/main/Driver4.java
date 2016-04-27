@@ -41,7 +41,6 @@ public class Driver4 {
 				for (int j=fft.freqToIndex(0);j<fft.freqToIndex(100);j++){
 					fft.scaleBand(j, 0);											//Modificar banda de frecuencias
 				}
-				
 				if(sel==1){//Darth Vader
 					for (int j=0;j<fft.specSize();j++){
 						float ampli=fft.getBand(j);
@@ -116,9 +115,7 @@ public class Driver4 {
 
 	public static void main(String[] argv){
 		Driver4 d = new Driver4();
-		//d.grabarAudio();
 		d.reproducirFourier();
-		// sel puede ser 1,2,3,4,o 5.
 		
 	}
 }

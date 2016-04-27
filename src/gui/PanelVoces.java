@@ -15,33 +15,29 @@ import javax.swing.JPanel;
 import main.Driver4;
 
 
-public class PanelVoces extends JPanel implements ActionListener{
+public class PanelVoces extends JPanel implements ActionListener, Runnable{
 	private JButton grabar;
-	//private JRadioButton sel1, sel2, sel3, sel4, sel5;
 	private JButton b1,b2,b3,b4,b5;
 	private JLabel labelMensaje;
 	private String mensaje;
-	protected ImageIcon i1, i2, i3, i4, i5;
 	private Driver4 driver;
+	private boolean clickgrabar;
+	private Thread h;
+	private int segundos;
 	
 	public PanelVoces(){
 		driver = new Driver4();
+		h = new Thread();
 		
-		i1 = new ImageIcon("darth.png"); 
-		i2 = new ImageIcon("storm.png");      
-		i3 = new ImageIcon("cepo.png"); 
-		i4 = new ImageIcon("artu.png"); 
-		i5 = new ImageIcon("yoda.png"); 
+		b1 = new JButton(new ImageIcon("darth.png"));
+		b2 = new JButton(new ImageIcon("storm.png"));
+		b3 = new JButton(new ImageIcon("cepo.png"));
+		b4 = new JButton(new ImageIcon("artu.png"));
+		b5 = new JButton(new ImageIcon("yoda.png"));
 		
-		b1 = new JButton(i1);
-		b2 = new JButton(i2);
-		b3 = new JButton(i3);
-		b4 = new JButton(i4);
-		b5 = new JButton(i5);
-		
-		
+		this.segundos = 5;
 		this.labelMensaje = new JLabel("    dfs               ");
-		this.mensaje = "Grabando por 5 segundos";
+		this.mensaje = "" + this.segundos;
 		
 		this.grabar = new JButton(new ImageIcon("recordd.png"));
 		
@@ -52,30 +48,19 @@ public class PanelVoces extends JPanel implements ActionListener{
 		this.b4.addActionListener(this);
 		this.b5.addActionListener(this);
 		
+		buildLayout();
+	}
+	
+	public void buildLayout(){
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridwidth=1; 
-		c.gridy = 0;
-		c.gridx = 0; 
-		//c.gridheight = 2;
-		this.add(b1, c);
-		//c.gridheight = 1;
+		c.gridy = 0; c.gridx = 0; this.add(b1, c);
 		c.gridx = 1; this.add(grabar,c);
 		c.gridx = 2; this.add(b2, c);
 		c.gridy = 1; c.gridx = 0; this.add(b3, c);
 		c.gridx = 1; this.add(b4, c);
 		c.gridx = 2; this.add(b5, c);
-		
-		//this.add(labelMensaje,c);
-		
-		 c.gridy = 2;
-		
-		
-		 
-		c.gridy = 3; c.gridx = 0; 
-		c.gridx = 2; 
-		
-		
 	}
 
 
@@ -83,6 +68,7 @@ public class PanelVoces extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==grabar){
 			driver.grabarAudio();
+			this.clickgrabar = true;
 		}
 		else{
 			if(e.getSource()==b1){
@@ -109,5 +95,27 @@ public class PanelVoces extends JPanel implements ActionListener{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		setBackground(Color.white);
+		//g.drawString(this.segundos+"", this.getWidth()/2-40, 40);
 	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		while(this.clickgrabar){
+			h.start();
+			try {
+				h.sleep(1000);
+				this.segundos--;
+				
+				
+				
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	}
+
+
 }
